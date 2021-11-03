@@ -19,6 +19,10 @@
 // Al termine della partita il software deve scoprire tutte le bombe e comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato un quadratino con un numero consentito. (quindi se ci pensate dovrete tenere traccia del punteggio)
 
 const gridCont = document.getElementById("grid");
+const facile = document.getElementById("facile");
+const medio = document.getElementById("medio");
+const difficile = document.getElementById("difficile");
+const risultato = document.getElementById("risultato");
 // Far scegliere all'utente la difficoltà 
 const livello = prompt("Scegli la difficoltà tra: facile, medio, difficile")
 
@@ -34,19 +38,36 @@ if(livello == "facile") {
     choose ="difficile";
 }
 
+const bomb = [];
+    while (bomb.length < 16) {
+        const max = 49;
+        const min = 1;
+    const bombGeneretor = Math.floor(Math.random() * (max - min) + min);
+    if (bomb.includes(bombGeneretor) == false) {
+        bomb.push(bombGeneretor);
+        console.log(bombGeneretor);
+    }
+}
 
-for(let i = 0; i < dimension; i++) {
+for(let i = 1; i < dimension; i++) {
     let newElement = elementGen("div", "square", choose);
-    
+    newElement.setAttribute("id", i);
     newElement.addEventListener("click",
     function(){
-        this.classList.add("active")
-        newElement.innerHTML += i+1
+        let id= newElement.id;
+        if(bomb.includes(id)){
+            this.classList.add("active");
+            console.log("hai perso");
         }
+        
+      }
     )
 
     gridCont.appendChild(newElement)
-}
+};
+
+
+
 
 
 // funzioni utili
@@ -57,3 +78,4 @@ function elementGen(elementGen, classPlus, classP_2) {
     node.classList.add(classP_2)
     return node
 }
+
