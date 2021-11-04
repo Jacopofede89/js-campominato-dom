@@ -49,21 +49,27 @@ const bomb = [];
     }
 }
 
+var counter = 0;
+
+let squareMax = dimension - 16;
+
 for(let i = 1; i < dimension; i++) {
     let newElement = elementGen("div", "square", choose);
     newElement.setAttribute("id", i);
     newElement.addEventListener("click",
     function(){
-        let id= newElement.id;
+        let id= parseInt(newElement.id);
         if(bomb.includes(id)){
             this.classList.add("active");
             console.log("hai perso");
+            alert("Hai perso!!");
+
         }
         
       }
     )
-
-    gridCont.appendChild(newElement)
+ 
+  gridCont.appendChild(newElement)
 };
 
 
